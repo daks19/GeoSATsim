@@ -6,7 +6,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // ISS Position proxy endpoint (if needed to avoid CORS issues)
   app.get("/api/iss-position", async (req, res) => {
     try {
-      const response = await fetch("https://api.open-notify.org/iss-now.json");
+      const response = await fetch("https://api.wheretheiss.at/v1/satellites/25544");
       const data = await response.json();
       res.json(data);
     } catch (error) {

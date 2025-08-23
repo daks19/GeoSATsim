@@ -77,11 +77,13 @@ export default function MissionPanel() {
         {/* ISS Live Data */}
         <div className="border-t border-gray-600 pt-4">
           <h4 className="font-semibold text-green-400 mb-2">ISS Live Data</h4>
-          {issData ? (
+          {issData && typeof issData.latitude === 'number' ? (
             <div className="text-xs space-y-1">
-              <p><strong>Lat:</strong> {issData.iss_position.latitude}°</p>
-              <p><strong>Lon:</strong> {issData.iss_position.longitude}°</p>
-              <p><strong>Updated:</strong> {new Date(issData.timestamp * 1000).toLocaleTimeString()}</p>
+              <p><strong>Lat:</strong> {issData.latitude.toFixed(2)}°</p>
+              <p><strong>Lon:</strong> {issData.longitude.toFixed(2)}°</p>
+              <p><strong>Alt:</strong> {(issData.altitude || 408).toFixed(0)} km</p>
+              <p><strong>Speed:</strong> {(issData.velocity || 0).toFixed(1)} km/h</p>
+              <p><strong>Updated:</strong> {issData.timestamp ? new Date(issData.timestamp * 1000).toLocaleTimeString() : 'Unknown'}</p>
             </div>
           ) : (
             <p className="text-xs text-gray-400">Loading ISS data...</p>

@@ -19,7 +19,7 @@ export default function Satellite() {
       {/* Main satellite body */}
       <mesh castShadow>
         <boxGeometry args={[0.3, 0.3, 0.6]} />
-        <meshPhongMaterial color="#Silver" />
+        <meshPhongMaterial color="#C0C0C0" />
       </mesh>
       
       {/* Solar panels */}

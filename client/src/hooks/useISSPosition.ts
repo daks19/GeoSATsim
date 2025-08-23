@@ -2,12 +2,11 @@ import { useState, useEffect } from 'react';
 import * as THREE from 'three';
 
 interface ISSData {
-  message: string;
+  latitude: number;
+  longitude: number;
+  altitude: number;
+  velocity: number;
   timestamp: number;
-  iss_position: {
-    latitude: string;
-    longitude: string;
-  };
 }
 
 export function useISSPosition() {
@@ -18,19 +17,25 @@ export function useISSPosition() {
 
   const fetchISSPosition = async () => {
     try {
-      const response = await fetch('https://api.open-notify.org/iss-now.json');
+      const response = await fetch('https://api.wheretheiss.at/v1/satellites/25544');
       if (!response.ok) {
-        throw new Error('Failed to fetch ISS position');
+        throw new Error(`Failed to fetch ISS position: ${response.status}`);
       }
-      const data: ISSData = await response.json();
+      const data = await response.json();
+      
+      // Validate the data structure
+      if (typeof data.latitude !== 'number' || typeof data.longitude !== 'number') {
+        throw new Error('Invalid ISS data structure');
+      }
+      
       setIssData(data);
       
       // Convert lat/lon to 3D position
-      const lat = parseFloat(data.iss_position.latitude);
-      const lon = parseFloat(data.iss_position.longitude);
+      const lat = data.latitude;
+      const lon = data.longitude;
       
-      // ISS altitude is approximately 408 km
-      const issAltitude = 408;
+      // Use actual ISS altitude from the API, fallback to 408 if not available
+      const issAltitude = data.altitude || 408;
       const earthRadius = 5; // Our Earth sphere radius in the scene
       const radius = earthRadius + (issAltitude / 100); // Scale down altitude
       
@@ -44,7 +49,8 @@ export function useISSPosition() {
       setIssPosition(new THREE.Vector3(x, y, z));
       setError(null);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Unknown error occurred');
+      const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred';
+      setError(errorMessage);
       console.error('Failed to fetch ISS position:', err);
     } finally {
       setIsLoading(false);
