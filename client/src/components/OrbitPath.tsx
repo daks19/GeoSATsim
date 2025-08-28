@@ -18,8 +18,6 @@ export default function OrbitPath() {
   }, [orbitPoints]);
 
   return (
-    <line ref={lineRef} geometry={geometry}>
-      <lineBasicMaterial color="#00FFFF" transparent opacity={0.6} />
-    </line>
+    <primitive object={new THREE.Line(geometry, new THREE.LineBasicMaterial({ color: "#00FFFF", transparent: true, opacity: 0.6 }))} ref={lineRef} />
   );
 }

@@ -19,7 +19,7 @@ export default function SatelliteSimulator() {
   useFrame((state, delta) => {
     // Update satellite position based on orbital mechanics
     const newPosition = calculateSatellitePosition(satellite, delta);
-    updateSatellitePosition(newPosition, newPosition.angle);
+    updateSatellitePosition(newPosition.position, newPosition.angle);
     
     // Check mission progress
     checkMissionProgress();

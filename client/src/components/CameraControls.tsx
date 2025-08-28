@@ -4,7 +4,7 @@ import { OrbitControls } from "@react-three/drei";
 
 export default function CameraControls() {
   const { camera, gl } = useThree();
-  const controlsRef = useRef();
+  const controlsRef = useRef<any>(null);
 
   return (
     <OrbitControls
