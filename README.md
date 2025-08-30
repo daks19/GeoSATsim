@@ -2,94 +2,68 @@
 
 Live demo: https://geosatsim.vercel.app/
 
-A small educational satellite simulator built with React, React Three Fiber and Vite. Visualize orbits, control a satellite, and explore mission UI elements.
+Short intro
+------------
+GeoSATsim is an educational satellite simulator that visualizes orbits, satellites and Earth in 3D using React + React Three Fiber. It’s intended for demos, teaching orbital concepts, and quick visual experiments.
 
-## Features
-- 3D Earth (textured), orbit paths, satellites and ISS marker
-- Star/galaxy background and customizable visuals
-- Mission control UI and live ISS data integration
+Quick features
+--------------
+- Textured 3D Earth with orbit paths
+- Satellite and ISS markers with basic controls
+- Star field and Milky Way background sphere
+- Simple mission UI and live ISS integration hooks
 
-## Live Demo
-Open the demo at: https://geosatsim.vercel.app/
-
-## Getting started (local)
-
-Prerequisites:
-- Node.js (16+ recommended)
-- npm
-
-Install dependencies:
+Run locally (quick)
+-------------------
+1. Install dependencies:
 
 ```powershell
 npm install
 ```
 
-Run the dev server (starts the server and client in this repo):
+2. Start development server (server + client):
 
 ```powershell
 npm run dev
 ```
 
-Open http://localhost:5000 (or the address printed by the server).
+3. Open http://localhost:5000
 
-## Build
-
-There are two build targets in this repo:
-
-- `build:client` — builds the static client into `dist/public` (used for Vercel static deploy)
-- `build:server` — bundles the server (for a self-hosted Node deployment)
-
-Build the client:
+Build
+-----
+- Client-only build (recommended for static hosting):
 
 ```powershell
 npm run build:client
 ```
 
-Build client + server locally (optional):
+- Server bundle (optional, for self-hosting Node server):
 
 ```powershell
-npm run build
-# or
 npm run build:server
 ```
 
-After `npm run build:client` the static site is available in `dist/public`.
+Files & structure (important parts)
+----------------------------------
+- `client/` — React app source served by Vite
+- `client/src/components/` — 3D scene and UI components
+- `server/` — optional Express server (not required for static deploy)
+- `dist/public/` — static output after `build:client`
 
-## Deploying to Vercel (static site)
+Textures
+--------
+- Add `client/public/textures/earth.jpg` (daytime Earth) for best visuals.
+- Optional: `clouds.png`, `8k_stars_milky_way.jpg` for animated clouds and background.
 
-This project is configured to deploy the static client build to Vercel (see `vercel.json`). Steps:
+Deployment
+----------
+For detailed deployment steps (Vercel, settings, and notes) see `README_DEPLOY.md` in this repo. The project is pre-configured to deploy the static client in `dist/public`.
 
-1. Commit and push your repository to GitHub.
-2. In Vercel, create a new project and link your repo.
-3. Set the Build Command to:
+Contributing / Next steps
+-------------------------
+- Convert `server/` routes to serverless functions under `/api` if you need hosted APIs.
+- Add textures, tweak materials, or split bundles for faster load.
 
-```text
-npm run build:client
-```
-
-4. Set the Output Directory to:
-
-```text
-dist/public
-```
-
-5. Deploy. The site will be available at the domain Vercel assigns (or your custom domain).
-
-## Textures and assets
-
-- Place Earth texture at `client/public/textures/earth.jpg` for best visuals.
-- Optional cloud map: `client/public/textures/clouds.png` (if you add it the app will animate clouds).
-- Background galaxy: `client/public/textures/8k_stars_milky_way.jpg` (used by `BackgroundSphere`).
-
-If you don't add textures the app falls back to a basic material.
-
-## Converting server routes to Vercel serverless functions
-
-The `/server` APIs are not deployed by default in the static deployment. If you need server endpoints on Vercel, move the relevant code into the `api/` folder as Vercel Serverless Functions. I can help convert specific files on request.
-
-## Troubleshooting
-- If the site serves raw source instead of the app, ensure Vercel is configured to serve the static `dist/public` output (see Deploying to Vercel section).
-- If `npm run build` fails on Vercel, make sure `build` runs only the client (this repo ships `build:client` and sets `build` to run it by default).
-
-## License
+License
+-------
 MIT
