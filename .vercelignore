@@ -1,0 +1,8 @@
+# Ignore server and local files when deploying to Vercel
+server/
+.local/
+.replit
+replit.md
+*.log
+node_modules/
+*** End Patch
