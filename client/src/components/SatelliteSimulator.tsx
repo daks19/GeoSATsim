@@ -2,6 +2,8 @@ import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
 import Earth from "./Earth";
+import StarsBackground from "./StarsBackground";
+import BackgroundSphere from "./BackgroundSphere";
 import Satellite from "./Satellite";
 import ISS from "./ISS";
 import OrbitPath from "./OrbitPath";
@@ -31,12 +33,16 @@ export default function SatelliteSimulator() {
   });
 
   return (
-    <group ref={groupRef}>
-      <Earth />
-      <Satellite />
-      <ISS />
-      <OrbitPath />
-      <CameraControls />
-    </group>
+    <>
+      <BackgroundSphere />
+      <StarsBackground />
+      <group ref={groupRef}>
+        <Earth />
+        <Satellite />
+        <ISS />
+        <OrbitPath />
+        <CameraControls />
+      </group>
+    </>
   );
 }
