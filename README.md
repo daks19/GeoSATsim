@@ -34,7 +34,6 @@ GeoSATsim is an **educational 3D satellite simulator**. It visualizes Earth, sat
 
 ## 🖼️ ![alt text](<Screenshot 2025-08-30 142003.png>)
 
-*(Add preview images or GIFs of the app in action here.)*
 
 ---
 
